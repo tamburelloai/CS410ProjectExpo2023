@@ -1,0 +1,100 @@
+the,Article,1,1,Pre-primer,12
+be,Verb,2,2,Primer,21
+to,Preposition,3,"7, 9",Pre-primer,17
+of,Preposition,4,4,Grade 1,12
+and,Coordinator,5,3,Pre-primer,16
+a,Article,6,5,Pre-primer,20
+in,Preposition,7,"6, 128, 3038",Pre-primer,23
+that,"Subordinator, determiner",8,"12, 27, 0903",Primer,17
+have,Verb,9,8,Primer,25
+I,Pronoun,10,11,Pre-primer,7
+it,Pronoun,11,10,Pre-primer,18
+for,Preposition,12,"13, 2339",Pre-primer,19
+not,Adverb et al.,13,"28, 2929",Pre-primer,5
+on,Preposition,14,"17, 155",Primer,43
+with,Preposition,15,16,Primer,11
+he,Pronoun,16,15,Primer,7
+as,"Adverb, preposition",17,"33, 49, 129",Grade 1,17
+you,Pronoun,18,14,Pre-primer,9
+do,"Verb, noun",19,18,Primer,38
+at,Preposition,20,22,Primer,14
+this,"Determiner, adverb, noun",21,"20, 4665",Primer,9
+but,"Preposition, adverb, coordinator",22,"23, 1715",Primer,17
+his,Possessive pronoun,23,"25, 1887",Grade 1,6
+by,Preposition,24,"30, 1190",Grade 1,19
+from,Preposition,25,26,Grade 1,4
+they,Pronoun,26,21,Primer,6
+we,Pronoun,27,24,Pre-primer,6
+say,Verb et al.,28,19,Primer,17
+her,Possessive pronoun,"29, 106",42,Grade 1,3
+she,Pronoun,30,31,Primer,7
+or,Coordinator,31,32,Grade 2,11
+an,Article,32,(a),Grade 1,6
+will,"Verb, noun",33,"48, 1506",Primer,16
+my,Possessive pronoun,34,44,Pre-primer,5
+one,"Noun, adjective, et al.",35,"51, 104, 839",Pre-primer,24
+all,Adjective,36,"43, 222",Primer,15
+would,Verb,37,41,Grade 2,13
+there,"Adverb, pronoun, et al.",38,"53, 116",Primer,14
+their,Possessive pronoun,39,36,Grade 2,2
+what,"Pronoun, adverb, et al.",40,34,Primer,19
+so,"Coordinator, adverb, et al.",41,"55, 196",Primer,18
+up,"Adverb, preposition, et al.",42,"50, 456",Pre-primer,50
+out,Preposition,43,"64, 149",Primer,38
+if,Preposition,44,40,Grade 3,9
+about,"Preposition, adverb, et al.",45,"46, 179",Grade 3,18
+who,"Pronoun, noun",46,38,Primer,5
+get,Verb,47,39,Primer,37
+which,Pronoun,48,58,Grade 2,7
+go,"Verb, noun",49,35,Pre-primer,54
+me,Pronoun,50,61,Pre-primer,10
+when,Adverb,51,"57, 136",Grade 1,11
+make,"Verb, noun",52,45,"Grade 2 [as ""made""]",48
+can,"Verb, noun",53,"37, 2973",Pre-primer,18
+like,"Preposition, verb",54,"74, 208, 1123, 1684, 2702",Primer,26
+time,Noun,55,52,Dolch list of 95 nouns,14
+no,"Determiner, adverb",56,"93, 699, 916, 1111, 4555",Primer,10
+just,Adjective,57,"66, 1823",,14
+him,Pronoun,58,68,,5
+know,"Verb, noun",59,47,,13
+take,"Verb, noun",60,63,,66
+people,Noun,61,62,,9
+into,Preposition,62,65,,10
+year,Noun,63,54,,7
+your,Possessive pronoun,64,69,,4
+good,Adjective,65,"110, 2280",,32
+some,Determiner,66,60,,10
+could,Verb,67,71,,6
+them,Pronoun,68,59,,3
+see,Verb,69,67,,25
+other,"Adjective, pronoun",70,"75, 715, 2355",,12
+than,Preposition,71,"73, 712",,4
+then,Adverb,72,77,,10
+now,Preposition,73,"72, 1906",,13
+look,Verb,74,"85, 604",,17
+only,Adverb,75,"101, 329",,11
+come,Verb,76,70,,20
+its,Possessive pronoun,77,78,,2
+over,Preposition,78,"124, 182",,19
+think,Verb,79,56,,10
+also,Adverb,80,87,,2
+back,"Noun, adverb",81,"108, 323, 1877",,36
+after,Preposition,82,"120, 260",,14
+use,"Verb, noun",83,"92, 429",,17
+two,Noun,84,80,,6
+how,Adverb,85,76,,11
+our,Possessive pronoun,86,79,,3
+work,"Verb, noun",87,"117, 199",,28
+first,Adjective,88,"86, 2064",,10
+well,Adverb,89,"100, 644",,30
+way,"Noun, adverb",90,"84, 4090",,16
+even,Adjective,91,"107, 484",,23
+new,Adjective et al.,92,88,,18
+want,Verb,93,83,,10
+because,Preposition,94,"89, 509",,7
+any,Pronoun,95,"109, 4720",,4
+these,Pronoun,96,82,,2
+give,Verb,97,98,,19
+day,Noun,98,90,,9
+most,Adverb,99,"144, 187",,12
+us,Pronoun,100,113,,6
