@@ -24,6 +24,21 @@ highlight language differences and portrayals of current events.
 
 ---
 
+
+
+## Watch the Demo
+Here’s a demonstration of the application in action!
+(The link below directs you to a public google drive link)  
+
+[CLICK HERE TO WATCH THE DEMO VIDEO](https://drive.google.com/fiAle/d/1KT-lymmRFjhcGkJhKsq-jSIljQvS_jmL/view?usp=sharing)
+
+---
+
+## Documentation
+Docstrings explaining the purpose of all methods can be found attached to the method signature
+
+---
+
 ## **Setup (Cloud Hosted) [RECOMMENDED]**
 
 The app is already running! (hosted by streamlit) 🎉
@@ -56,11 +71,6 @@ streamlit run app.py
 
 ---
 
-## Watch the Demo
-
-Here’s a demonstration of the application in action!
-
-[Video Title](https://drive.google.com/file/d/1KT-lymmRFjhcGkJhKsq-jSIljQvS_jmL/view?usp=sharing)
 ## Under the Hood
 
 ### Word2Vec
