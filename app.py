@@ -20,7 +20,7 @@ if 'input' not in st.session_state:
 st.title("Visualized Media Bias and Polarization Detection")
 if st.session_state.input:
     # Show input widgets if in input mode
-    st.write("Utilizes cutting-edge Natural Language Processing (NLP) techniques to analyze and visualize media bias across various news outlets. The platform's primary function is to identify and quantify ideological biases and narrative divergences in news reporting, using advanced tools like spaCy and PyTorch. Users will be able to see dynamic visualizations that highlight differences in media language and portrayal of current events, offering a clearer understanding of media polarization. The platform aims to enhance public dialogue and support democratic values by making users aware of the biases in news sources. The app's effectiveness will be evaluated through precision, recall, F1-score, ROC-AUC metrics, and user feedback.")
+    st.write("Utilizes cutting-edge Natural Language Processing (NLP) techniques to analyze and visualize media bias across various news outlets. The platform's primary function is to identify and quantify ideological biases and narrative divergences in news reporting, using advanced tools like spaCy and PyTorch. Users will be able to see dynamic visualizations that highlight differences in media language and portrayal of current events, offering a clearer understanding of media polarization. The platform aims to enhance public dialogue and support democratic values by making users aware of the biases in news sources.")
     st.button('Get Started', on_click=show_result) # Callback changes it to result mode
 else:
 
