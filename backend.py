@@ -8,11 +8,30 @@ import pandas as pd
 import numpy as np
 from transformers import pipeline
 from sklearn.decomposition import PCA
-from utils import load_secrets, left_wing_sources, right_wing_sources
+from utils import left_wing_sources, right_wing_sources
 
+def load_secrets():
+    res = {}
+    with open('files/secrets.txt', 'r') as f:
+        for line in f.readlines():
+            line = line.split('=')
+            assert len(line) == 2
+            source, apikey = line
+            apikey = apikey.replace('\n', '')
+            res[source] = apikey
+    return res
+
+secrets = load_secrets()
 
 class Backend:
     def __init__(self):
+        """
+        Initializes the Backend class.
+            - Loads secrets for API access.
+            - Initializes news API manager with API key.
+            - Loads Spacy NLP model and sentiment model.
+            - Sets up left-wing and right-wing news sources.
+        """
         secrets = load_secrets()
         self.newsapi = NewsAPIManager(secrets['newsapi'])
         self.nlp_model = spacy.load("en_core_web_md")
@@ -31,6 +50,13 @@ class Backend:
 
 
     def run_query(self, query):
+        """
+        Executes a news query and processes the results.
+        -  If in testing mode, loads sample data.
+        - Otherwise, fetches news articles from left-wing and right-wing sources.
+        - Processes the query results for further analysis.
+        :param query: A string representing the news query.
+       """
         testing = True #False
 
         if testing:
@@ -54,6 +80,15 @@ class Backend:
         self.process_query_results()
 
     def sort_titles_by_similarity(self, leftwing_titles, rightwing_titles):
+        """
+        Sorts news article titles by their similarity.
+        - Compares titles from left-wing and right-wing sources.
+        - Pairs titles based on similarity scores.
+
+        :param leftwing_titles: A list of strings containing titles from left-wing sources.
+        :param rightwing_titles: A list of strings containing titles from right-wing sources.
+        :return: Two lists of sorted titles from left-wing and right-wing sources.
+        """
         # Create document objects for each sentence
         left_docs = [self.nlp_model(sentence) for sentence in leftwing_titles]
         right_docs = [self.nlp_model(sentence) for sentence in rightwing_titles]
@@ -86,6 +121,11 @@ class Backend:
         return left_output, right_output
 
     def process_query_results(self):
+        """
+        Processes the results of a news query.
+        - Extracts titles from left-wing and right-wing responses.
+        - Sorts titles by similarity and analyzes sentiment.
+        """
         assert self.leftwing_response and self.rightwing_response
         # extract titles from response
         leftwing_titles = pd.DataFrame(self.leftwing_response)['title'].tolist()
@@ -97,9 +137,24 @@ class Backend:
         self.rightwing_dataframe = self.build_response_dataset(self.rightwing_titles)
 
     def map_sentiment_to_color(self, value):
+        """
+        Maps sentiment values to corresponding colors.
+        - Currently a placeholder for future implementation.
+
+        :param value: A sentiment value to map.
+        :return: A color representation of the sentiment.
+        """
         return value
 
     def build_response_dataset(self, titles):
+        """
+        Builds a dataset from news titles with associated sentiment scores.
+        - Computes sentiment for each title.
+        - Filters out titles with neutral sentiment.
+
+        :param titles: A list of news titles.
+        :return: A pandas DataFrame with titles and their sentiment scores.
+        """
         sentiment = []
         for t in titles:
             sentiment.append(self.map_sentiment_to_color(self.get_sentiment(t)['compound']))
@@ -113,6 +168,13 @@ class Backend:
 
 
     def get_entity_breakdown_html(self, query_string):
+        """
+        Generates HTML visualization for named entities in a text.
+        - Uses Spacy's displacy for rendering entities.
+
+        :param query_string: A string to analyze for named entities.
+        :return: A string containing HTML for the entity visualization.
+        """
         doc = self.nlp_model(query_string)
         colors = {"ORG": "linear-gradient(90deg, #aa9cfc, #fc9ce7)"}
         options = {"colors": colors}
@@ -120,9 +182,24 @@ class Backend:
         return ent_html
 
     def get_sentiment(self, data_i):
+        """
+        Analyzes sentiment of a given text.
+        - Uses the sentiment model to calculate sentiment scores.
+
+        :param data_i: A string for which sentiment analysis is performed.
+        :return: A dictionary with sentiment scores.
+        """
         return dict(self.sentiment_model(data_i)._.polarity)
 
     def get_aggregate_sentiment(self, data):
+        """
+        Computes aggregate sentiment for a collection of texts.
+        - Determines overall sentiment and the most significant positive and negative cases.
+        - Generates a visualization of the most significant sentiment.
+
+        :param data: A list of strings to analyze.
+        :return: A dictionary containing aggregate sentiment information.
+        """
         data = data.tolist()
         negsum, possum = 0, 0
         most_negative = (None, float('-inf'))
@@ -148,29 +225,25 @@ class Backend:
         return {'sentiment': max_key, 'sentiment_score': max_value, 'delta': delta, 'svg_image': svg_image}
 
     def build_embedding_matrix(self):
-
-
-
-
-
+        """
+        Builds an embedding matrix for words in news titles.
+        - Uses NLP model to get word embeddings.
+        - Applies t-SNE for dimensionality reduction.
+        - Categorizes words based on their occurrence in different news sources.
+        """
         # get most commonly used words in english language to serve as baseline cluster
         most_common_100 = set(pd.read_csv('mostcommonwords.csv').iloc[:, 0].tolist())
-
         # Extract words from titles
         leftwing_words = [word for sentence in self.leftwing_titles for word in sentence.split() if word.isalpha()]
         rightwing_words = [word for sentence in self.rightwing_titles for word in sentence.split() if word.isalpha()]
-
         # Calculate intersection and unique words (found in articles returned by query)
         intersection = set(leftwing_words) & set(rightwing_words)
         strictly_leftwing_words = set(leftwing_words) - intersection
         strictly_rightwing_words = set(rightwing_words) - intersection
-
         # Combine all unique words
         all_words = list(intersection | strictly_leftwing_words | strictly_rightwing_words | most_common_100)
-
         # Get embeddings
         docs = [self.nlp_model(word) for word in all_words]
-
         # Dimensionality reduction with t-SNE
         tsne = TSNE(n_components=3, random_state=0)
         embeddings = np.array([word.vector for word in docs])
@@ -179,7 +252,6 @@ class Backend:
         x = reduced_embeddings[:, 0].reshape(-1)
         y = reduced_embeddings[:, 1].reshape(-1)
         z = reduced_embeddings[:, 2].reshape(-1)
-
         labels = ['intersection' if (word in intersection or word in most_common_100) else
                   'left-wing' if (word in strictly_leftwing_words) else
                   'right-wing' for word in all_words]
