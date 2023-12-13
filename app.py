@@ -1,10 +1,5 @@
 import subprocess
 import streamlit as st
-@st.cache_resource
-def download_en_core_web_md():
-    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_md"])
-
-download_en_core_web_md()
 import datetime
 import plotly.express as px
 #TABLE
@@ -13,7 +8,7 @@ import pandas as pd
 from backend import Backend
 import streamlit as st
 import numpy as np
-
+st.set_page_config(layout='wide')
 background_color = "#111111"  # Example background color: white
 navbar_color = "#0000FF"  # Example navbar color: blue
 text_color = "rgba(255, 0, 0, 255)"  # Example text color: black
