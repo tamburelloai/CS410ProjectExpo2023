@@ -57,7 +57,7 @@ class Backend:
         - Processes the query results for further analysis.
         :param query: A string representing the news query.
        """
-        testing = True #False
+        testing = False
 
         if testing:
             print('testing true')
