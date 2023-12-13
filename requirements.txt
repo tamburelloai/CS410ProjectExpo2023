@@ -4,3 +4,6 @@ matplotlib
 pandas
 asent
 scikit-learn
+transformers
+newsapi
+spacy
