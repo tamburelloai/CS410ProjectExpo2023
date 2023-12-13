@@ -12,7 +12,6 @@ import plotly.graph_objects as go
 import pandas as pd
 from backend import Backend
 import streamlit as st
-st.set_page_config(layout="wide")
 import numpy as np
 
 background_color = "#111111"  # Example background color: white
