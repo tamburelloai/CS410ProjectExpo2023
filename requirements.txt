@@ -5,5 +5,5 @@ pandas
 asent
 scikit-learn
 transformers
-newsapi
+newsapi-python
 spacy
