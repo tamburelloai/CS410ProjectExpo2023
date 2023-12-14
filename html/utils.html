@@ -36,10 +36,11 @@ import numpy as np
 # CONSTANTS
 background_color = &#34;#111111&#34;
 navbar_color = &#34;#0000FF&#34;  # Example navbar color: blue
-text_color = &#34;rgba(255, 0, 0, 255)&#34;  # Example text color: black
+text_color = &#34;rgba(255, 255, 0, 255)&#34;  # Example text color: black
 header_color = &#34;rgba(255, 235, 122, 0.85)&#34;  # Example subheader color: green
 subheader_color = &#34;rgba(255, 235, 122, 0.7)&#34;  # Example subheader color: green
 text_color = &#34;rgba(255, 235, 122, 0.55)&#34;  # Example subheader color: green
+
 left_wing_sources = [
     &#34;the-huffington-post&#34;,
     &#34;msnbc&#34;,
@@ -65,12 +66,6 @@ def set_custom_css():
     &#34;&#34;&#34;
     css = f&#34;&#34;&#34;
         &lt;style&gt;
-        /* Set the sidebar color */
-        .stSidebar {{
-            background-color: {background_color};
-        }}
-
-        /* Set the top navigation bar color */
         header .css-1aumxhk {{
             background-color: {navbar_color};
         }}
@@ -100,6 +95,10 @@ def set_custom_css():
 
         h3 {{
             color: {subheader_color};  /* Example: Green color for subheader */
+        }}
+        
+        .css-1lcbmhc {{
+            background-color: {subheader_color}; /* Light Blue */
         }}
         &lt;/style&gt;
         &#34;&#34;&#34;
@@ -236,19 +235,22 @@ def render_table(df, wing):
         Colors the cells based on the &#39;sentiment&#39; value.
         Red for negative sentiment, green for positive.
         The intensity of the color is proportional to the absolute sentiment value.
+        Text color is set to a darker shade of yellow and font weight is bold for better visibility.
         &#34;&#34;&#34;
         sentiment_value = row[&#39;sentiment&#39;]
         base_color_red = 255
         base_color_green = 255
+        text_color = &#39;#000000&#39;  # Darker shade of yellow
+        font_weight = &#39;bold&#39;  # Bold font weight
 
         if sentiment_value &lt; 0:
             color_intensity = min(int(255 + (255 * sentiment_value)), 255)
-            color = f&#39;rgb({base_color_red}, {color_intensity}, {color_intensity})&#39;  # More red for negative
+            bg_color = f&#39;rgb({base_color_red}, {color_intensity}, {color_intensity})&#39;
         else:
             color_intensity = min(int(255 - (255 * sentiment_value)), 255)
-            color = f&#39;rgb({color_intensity}, {base_color_green}, {color_intensity})&#39;  # More green for positive
+            bg_color = f&#39;rgb({color_intensity}, {base_color_green}, {color_intensity})&#39;
 
-        return [&#39;background-color: %s&#39; % color for _ in row]
+        return [f&#39;background-color: {bg_color}; color: {text_color}; font-weight: {font_weight}&#39; for _ in row]
 
     styled_df = df.style.apply(color_cells_by_sentiment, axis=1)
     st.dataframe(styled_df, hide_index=True)
@@ -544,19 +546,22 @@ def render_sentiment_distribution(left_df, right_df):
         Colors the cells based on the &#39;sentiment&#39; value.
         Red for negative sentiment, green for positive.
         The intensity of the color is proportional to the absolute sentiment value.
+        Text color is set to a darker shade of yellow and font weight is bold for better visibility.
         &#34;&#34;&#34;
         sentiment_value = row[&#39;sentiment&#39;]
         base_color_red = 255
         base_color_green = 255
+        text_color = &#39;#000000&#39;  # Darker shade of yellow
+        font_weight = &#39;bold&#39;  # Bold font weight
 
         if sentiment_value &lt; 0:
             color_intensity = min(int(255 + (255 * sentiment_value)), 255)
-            color = f&#39;rgb({base_color_red}, {color_intensity}, {color_intensity})&#39;  # More red for negative
+            bg_color = f&#39;rgb({base_color_red}, {color_intensity}, {color_intensity})&#39;
         else:
             color_intensity = min(int(255 - (255 * sentiment_value)), 255)
-            color = f&#39;rgb({color_intensity}, {base_color_green}, {color_intensity})&#39;  # More green for positive
+            bg_color = f&#39;rgb({color_intensity}, {base_color_green}, {color_intensity})&#39;
 
-        return [&#39;background-color: %s&#39; % color for _ in row]
+        return [f&#39;background-color: {bg_color}; color: {text_color}; font-weight: {font_weight}&#39; for _ in row]
 
     styled_df = df.style.apply(color_cells_by_sentiment, axis=1)
     st.dataframe(styled_df, hide_index=True)</code></pre>
@@ -597,12 +602,6 @@ def render_sentiment_distribution(left_df, right_df):
     &#34;&#34;&#34;
     css = f&#34;&#34;&#34;
         &lt;style&gt;
-        /* Set the sidebar color */
-        .stSidebar {{
-            background-color: {background_color};
-        }}
-
-        /* Set the top navigation bar color */
         header .css-1aumxhk {{
             background-color: {navbar_color};
         }}
@@ -632,6 +631,10 @@ def render_sentiment_distribution(left_df, right_df):
 
         h3 {{
             color: {subheader_color};  /* Example: Green color for subheader */
+        }}
+        
+        .css-1lcbmhc {{
+            background-color: {subheader_color}; /* Light Blue */
         }}
         &lt;/style&gt;
         &#34;&#34;&#34;

@@ -105,8 +105,8 @@ class Backend:
             self.rightwing_response = self.newsapi(query=query, sources=&#39;, &#39;.join(self.rightwing_sources))
             self.num_rightwing_results = self.rightwing_response[&#39;totalResults&#39;]
             self.rightwing_response = pd.DataFrame(self.rightwing_response)[&#39;articles&#39;].tolist()
-        self.process_query_results()
-
+        res = self.process_query_results()
+        return res
     def sort_titles_by_similarity(self, leftwing_titles, rightwing_titles):
         &#34;&#34;&#34;
         Sorts news article titles by their similarity.
@@ -154,7 +154,8 @@ class Backend:
         - Extracts titles from left-wing and right-wing responses.
         - Sorts titles by similarity and analyzes sentiment.
         &#34;&#34;&#34;
-        assert self.leftwing_response and self.rightwing_response
+        if not (self.leftwing_response and self.rightwing_response):
+            return False
         # extract titles from response
         leftwing_titles = pd.DataFrame(self.leftwing_response)[&#39;title&#39;].tolist()
         rightwing_titles = pd.DataFrame(self.rightwing_response)[&#39;title&#39;].tolist()
@@ -163,6 +164,7 @@ class Backend:
         # get sentiment of titles for coloring
         self.leftwing_dataframe = self.build_response_dataset(self.leftwing_titles)
         self.rightwing_dataframe = self.build_response_dataset(self.rightwing_titles)
+        return True
 
     def map_sentiment_to_color(self, value):
         &#34;&#34;&#34;
@@ -392,8 +394,8 @@ class Backend:
             self.rightwing_response = self.newsapi(query=query, sources=&#39;, &#39;.join(self.rightwing_sources))
             self.num_rightwing_results = self.rightwing_response[&#39;totalResults&#39;]
             self.rightwing_response = pd.DataFrame(self.rightwing_response)[&#39;articles&#39;].tolist()
-        self.process_query_results()
-
+        res = self.process_query_results()
+        return res
     def sort_titles_by_similarity(self, leftwing_titles, rightwing_titles):
         &#34;&#34;&#34;
         Sorts news article titles by their similarity.
@@ -441,7 +443,8 @@ class Backend:
         - Extracts titles from left-wing and right-wing responses.
         - Sorts titles by similarity and analyzes sentiment.
         &#34;&#34;&#34;
-        assert self.leftwing_response and self.rightwing_response
+        if not (self.leftwing_response and self.rightwing_response):
+            return False
         # extract titles from response
         leftwing_titles = pd.DataFrame(self.leftwing_response)[&#39;title&#39;].tolist()
         rightwing_titles = pd.DataFrame(self.rightwing_response)[&#39;title&#39;].tolist()
@@ -450,6 +453,7 @@ class Backend:
         # get sentiment of titles for coloring
         self.leftwing_dataframe = self.build_response_dataset(self.leftwing_titles)
         self.rightwing_dataframe = self.build_response_dataset(self.rightwing_titles)
+        return True
 
     def map_sentiment_to_color(self, value):
         &#34;&#34;&#34;
@@ -803,7 +807,8 @@ class Backend:
     - Extracts titles from left-wing and right-wing responses.
     - Sorts titles by similarity and analyzes sentiment.
     &#34;&#34;&#34;
-    assert self.leftwing_response and self.rightwing_response
+    if not (self.leftwing_response and self.rightwing_response):
+        return False
     # extract titles from response
     leftwing_titles = pd.DataFrame(self.leftwing_response)[&#39;title&#39;].tolist()
     rightwing_titles = pd.DataFrame(self.rightwing_response)[&#39;title&#39;].tolist()
@@ -811,7 +816,8 @@ class Backend:
     self.leftwing_titles, self.rightwing_titles = self.sort_titles_by_similarity(leftwing_titles, rightwing_titles)
     # get sentiment of titles for coloring
     self.leftwing_dataframe = self.build_response_dataset(self.leftwing_titles)
-    self.rightwing_dataframe = self.build_response_dataset(self.rightwing_titles)</code></pre>
+    self.rightwing_dataframe = self.build_response_dataset(self.rightwing_titles)
+    return True</code></pre>
 </details>
 </dd>
 <dt id="backend.Backend.run_query"><code class="name flex">
@@ -856,7 +862,8 @@ If in testing mode, loads sample data.
         self.rightwing_response = self.newsapi(query=query, sources=&#39;, &#39;.join(self.rightwing_sources))
         self.num_rightwing_results = self.rightwing_response[&#39;totalResults&#39;]
         self.rightwing_response = pd.DataFrame(self.rightwing_response)[&#39;articles&#39;].tolist()
-    self.process_query_results()</code></pre>
+    res = self.process_query_results()
+    return res</code></pre>
 </details>
 </dd>
 <dt id="backend.Backend.sort_titles_by_similarity"><code class="name flex">

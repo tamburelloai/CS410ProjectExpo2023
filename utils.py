@@ -207,19 +207,22 @@ def render_table(df, wing):
         Colors the cells based on the 'sentiment' value.
         Red for negative sentiment, green for positive.
         The intensity of the color is proportional to the absolute sentiment value.
+        Text color is set to a darker shade of yellow and font weight is bold for better visibility.
         """
         sentiment_value = row['sentiment']
         base_color_red = 255
         base_color_green = 255
+        text_color = '#000000'  # Darker shade of yellow
+        font_weight = 'bold'  # Bold font weight
 
         if sentiment_value < 0:
             color_intensity = min(int(255 + (255 * sentiment_value)), 255)
-            color = f'rgb({base_color_red}, {color_intensity}, {color_intensity})'  # More red for negative
+            bg_color = f'rgb({base_color_red}, {color_intensity}, {color_intensity})'
         else:
             color_intensity = min(int(255 - (255 * sentiment_value)), 255)
-            color = f'rgb({color_intensity}, {base_color_green}, {color_intensity})'  # More green for positive
+            bg_color = f'rgb({color_intensity}, {base_color_green}, {color_intensity})'
 
-        return ['background-color: %s' % color for _ in row]
+        return [f'background-color: {bg_color}; color: {text_color}; font-weight: {font_weight}' for _ in row]
 
     styled_df = df.style.apply(color_cells_by_sentiment, axis=1)
     st.dataframe(styled_df, hide_index=True)

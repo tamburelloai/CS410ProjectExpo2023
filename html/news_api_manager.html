@@ -34,12 +34,25 @@ class NewsAPIManager:
         self.client = NewsApiClient(api_key=secret_key)
 
     def __call__(self, *args, **kwargs):
+        response = {&#39;status&#39;: &#39;&#39;, &#39;totalResults&#39;: 0, &#39;articles&#39;: []}
         query = kwargs.get(&#39;query&#39;)
         source_list = kwargs.get(&#39;sources&#39;)
-        return self.client.get_everything(qintitle=query,
+        query_in_title_response = self.client.get_everything(qintitle=query,
                                           sources=source_list,
                                           language=&#39;en&#39;,
                                           sort_by=&#39;relevancy&#39;)
+
+        query_in_body_response = self.client.get_everything(query,
+                                                             sources=source_list,
+                                                             language=&#39;en&#39;,
+                                                             sort_by=&#39;relevancy&#39;)
+
+        response[&#39;totalResults&#39;] = query_in_title_response[&#39;totalResults&#39;] + query_in_body_response[&#39;totalResults&#39;]
+        response[&#39;articles&#39;].extend(query_in_title_response[&#39;articles&#39;])
+        response[&#39;articles&#39;].extend(query_in_body_response[&#39;articles&#39;])
+        return response
+
+
 
 
 
@@ -101,12 +114,23 @@ def test():
         self.client = NewsApiClient(api_key=secret_key)
 
     def __call__(self, *args, **kwargs):
+        response = {&#39;status&#39;: &#39;&#39;, &#39;totalResults&#39;: 0, &#39;articles&#39;: []}
         query = kwargs.get(&#39;query&#39;)
         source_list = kwargs.get(&#39;sources&#39;)
-        return self.client.get_everything(qintitle=query,
+        query_in_title_response = self.client.get_everything(qintitle=query,
                                           sources=source_list,
                                           language=&#39;en&#39;,
-                                          sort_by=&#39;relevancy&#39;)</code></pre>
+                                          sort_by=&#39;relevancy&#39;)
+
+        query_in_body_response = self.client.get_everything(query,
+                                                             sources=source_list,
+                                                             language=&#39;en&#39;,
+                                                             sort_by=&#39;relevancy&#39;)
+
+        response[&#39;totalResults&#39;] = query_in_title_response[&#39;totalResults&#39;] + query_in_body_response[&#39;totalResults&#39;]
+        response[&#39;articles&#39;].extend(query_in_title_response[&#39;articles&#39;])
+        response[&#39;articles&#39;].extend(query_in_body_response[&#39;articles&#39;])
+        return response</code></pre>
 </details>
 </dd>
 </dl>
