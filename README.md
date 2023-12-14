@@ -26,19 +26,20 @@ highlight language differences and portrayals of current events.
 
 
 
-## Watch the Demo
+## Watch the Demo 📺
 Here’s a demonstration of the application in action!
 (The link below directs you to a public google drive link)  
 
 [CLICK HERE TO WATCH THE DEMO VIDEO](https://drive.google.com/file/d/1KT-lymmRFjhcGkJhKsq-jSIljQvS_jmL/view)
 ---
 
-## Documentation
-Docstrings explaining the purpose of all methods can be found attached to the method signature
+## Documentation 📘
+
+Documentation for all classes and methods can be found in the sidebar of the application 
 
 ---
 
-## **Setup (Cloud Hosted) [RECOMMENDED]**
+## **Setup (Cloud Hosted) ☁️ [RECOMMENDED]**
 
 The app is already running! (hosted by streamlit) 🎉
 
@@ -48,7 +49,7 @@ Simply click the link below to experience a live demonstration:
 
 ---
 
-## **Setup (Local)**
+## **Setup (Local) 📜**
 
 1. Open terminal and navigate to the parent directory of the application.
 
