@@ -51,10 +51,13 @@ Simply click the link below to experience a live demonstration:
 
 ## **Setup (Local) 📜**
 
+0. Download or clone this repository
+
+
 1. Open terminal and navigate to the parent directory of the application.
 
 ```
-cd your/path/to/VizBias
+cd where/you/downloaded/or/cloned/to/CS410ProjectExpo2023-main
 ```
 
 1. Ensure python environment you'll be using has all required dependencies installed:
