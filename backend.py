@@ -34,7 +34,7 @@ class Backend:
         """
         secrets = load_secrets()
         self.newsapi = NewsAPIManager(secrets['newsapi'])
-        self.nlp_model = spacy.load("en_core_web_md")
+        self.nlp_model = spacy.load("en_core_web_sm")
         self.sentiment_model = spacy.blank('en')
         self.sentiment_model.add_pipe('sentencizer')
         self.sentiment_model.add_pipe('asent_en_v1')
@@ -77,8 +77,8 @@ class Backend:
             self.rightwing_response = self.newsapi(query=query, sources=', '.join(self.rightwing_sources))
             self.num_rightwing_results = self.rightwing_response['totalResults']
             self.rightwing_response = pd.DataFrame(self.rightwing_response)['articles'].tolist()
-        self.process_query_results()
-
+        res = self.process_query_results()
+        return res
     def sort_titles_by_similarity(self, leftwing_titles, rightwing_titles):
         """
         Sorts news article titles by their similarity.
@@ -126,7 +126,8 @@ class Backend:
         - Extracts titles from left-wing and right-wing responses.
         - Sorts titles by similarity and analyzes sentiment.
         """
-        assert self.leftwing_response and self.rightwing_response
+        if not (self.leftwing_response and self.rightwing_response):
+            return False
         # extract titles from response
         leftwing_titles = pd.DataFrame(self.leftwing_response)['title'].tolist()
         rightwing_titles = pd.DataFrame(self.rightwing_response)['title'].tolist()
@@ -135,6 +136,7 @@ class Backend:
         # get sentiment of titles for coloring
         self.leftwing_dataframe = self.build_response_dataset(self.leftwing_titles)
         self.rightwing_dataframe = self.build_response_dataset(self.rightwing_titles)
+        return True
 
     def map_sentiment_to_color(self, value):
         """

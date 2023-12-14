@@ -12,7 +12,7 @@ from utils import *
 
 # PAGE CONFIGURATION
 st.set_page_config(layout='wide')
-set_custom_css()
+#set_custom_css()
 
 if 'input' not in st.session_state:
     st.session_state.input = True
@@ -71,27 +71,30 @@ else:
 
         backend = Backend()
         if query_string:
-            backend.run_query(query_string)
-            print(f'THERE IS A STRING AT  {datetime.datetime.now()}')
+            res = backend.run_query(query_string)
+            if not res:
+                st.write("No responses found. Please try another query")
+            else:
+                print(f'THERE IS A STRING AT  {datetime.datetime.now()}')
 
-            st.divider()
-            st.markdown(backend.get_entity_breakdown_html(query_string), unsafe_allow_html=True)
-            st.divider()
+                st.divider()
+                st.markdown(backend.get_entity_breakdown_html(query_string), unsafe_allow_html=True)
+                st.divider()
 
-            backend.build_embedding_matrix()
-            render_sentiment_distribution(left_df=backend.leftwing_dataframe, right_df=backend.rightwing_dataframe)
-            plot_projection_visualization(backend.embedding_projection_data)
-            col1, col2 = st.columns(2)
+                backend.build_embedding_matrix()
+                render_sentiment_distribution(left_df=backend.leftwing_dataframe, right_df=backend.rightwing_dataframe)
+                plot_projection_visualization(backend.embedding_projection_data)
+                col1, col2 = st.columns(2)
 
-            # Left table
-            with col1:
-                render_average_sentiment(backend.leftwing_dataframe, wing='leftwing')
-                render_table(backend.leftwing_dataframe, wing='leftwing')
+                # Left table
+                with col1:
+                    render_average_sentiment(backend.leftwing_dataframe, wing='leftwing')
+                    render_table(backend.leftwing_dataframe, wing='leftwing')
 
-            # Right table
-            with col2:
-                render_average_sentiment(backend.rightwing_dataframe, wing='rightwing')
-                render_table(backend.rightwing_dataframe, wing='rightwing')
+                # Right table
+                with col2:
+                    render_average_sentiment(backend.rightwing_dataframe, wing='rightwing')
+                    render_table(backend.rightwing_dataframe, wing='rightwing')
 
 
 

@@ -6,12 +6,25 @@ class NewsAPIManager:
         self.client = NewsApiClient(api_key=secret_key)
 
     def __call__(self, *args, **kwargs):
+        response = {'status': '', 'totalResults': 0, 'articles': []}
         query = kwargs.get('query')
         source_list = kwargs.get('sources')
-        return self.client.get_everything(qintitle=query,
+        query_in_title_response = self.client.get_everything(qintitle=query,
                                           sources=source_list,
                                           language='en',
                                           sort_by='relevancy')
+
+        query_in_body_response = self.client.get_everything(query,
+                                                             sources=source_list,
+                                                             language='en',
+                                                             sort_by='relevancy')
+
+        response['totalResults'] = query_in_title_response['totalResults'] + query_in_body_response['totalResults']
+        response['articles'].extend(query_in_title_response['articles'])
+        response['articles'].extend(query_in_body_response['articles'])
+        return response
+
+
 
 
 
