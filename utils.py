@@ -8,10 +8,11 @@ import numpy as np
 # CONSTANTS
 background_color = "#111111"
 navbar_color = "#0000FF"  # Example navbar color: blue
-text_color = "rgba(255, 0, 0, 255)"  # Example text color: black
+text_color = "rgba(255, 255, 0, 255)"  # Example text color: black
 header_color = "rgba(255, 235, 122, 0.85)"  # Example subheader color: green
 subheader_color = "rgba(255, 235, 122, 0.7)"  # Example subheader color: green
 text_color = "rgba(255, 235, 122, 0.55)"  # Example subheader color: green
+
 left_wing_sources = [
     "the-huffington-post",
     "msnbc",
@@ -37,12 +38,6 @@ def set_custom_css():
     """
     css = f"""
         <style>
-        /* Set the sidebar color */
-        .stSidebar {{
-            background-color: {background_color};
-        }}
-
-        /* Set the top navigation bar color */
         header .css-1aumxhk {{
             background-color: {navbar_color};
         }}
@@ -72,6 +67,10 @@ def set_custom_css():
 
         h3 {{
             color: {subheader_color};  /* Example: Green color for subheader */
+        }}
+        
+        .css-1lcbmhc {{
+            background-color: {subheader_color}; /* Light Blue */
         }}
         </style>
         """
