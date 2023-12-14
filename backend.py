@@ -34,7 +34,7 @@ class Backend:
         """
         secrets = load_secrets()
         self.newsapi = NewsAPIManager(secrets['newsapi'])
-        self.nlp_model = spacy.load("en_core_web_md")
+        self.nlp_model = spacy.load("en_core_web_sm")
         self.sentiment_model = spacy.blank('en')
         self.sentiment_model.add_pipe('sentencizer')
         self.sentiment_model.add_pipe('asent_en_v1')
